@@ -10,6 +10,7 @@ screen.tracer(0)
 
 player = Player()
 car_manager = CarManager()
+scoreboard = Scoreboard()
 
 screen.listen()
 screen.onkeypress(player.move, "Up")
@@ -21,8 +22,15 @@ while game_is_on:
     car_manager.create_car()
     car_manager.car_move()
 
-    # TODO detect when turtle collides with car, stop game if happens
+    for car in car_manager.all_cars:
+        if player.distance(car) < 30:
+            scoreboard.game_over()
+            game_is_on = False
 
-    # TODO detect when turtle reaches top, then return to starting position, increase car speed
 
-    # TODO Create scoreboard to track level
+    if player.ycor() == player.finish_line_y:
+        player.reset_player()
+        car_manager.increase_speed()
+        scoreboard.update_scoreboard()
+
+screen.exitonclick()
