@@ -24,13 +24,17 @@ while game_is_on:
 
     for car in car_manager.all_cars:
         if player.distance(car) < 30:
-            scoreboard.game_over()
-            game_is_on = False
+            player.reset_player()
+            car_manager.reset()
+            scoreboard.reset_scoreboard()
 
 
     if player.ycor() == player.finish_line_y:
         player.reset_player()
         car_manager.increase_speed()
+        # scoreboard.update_scoreboard()
+        scoreboard.increase_level()
         scoreboard.update_scoreboard()
+
 
 screen.exitonclick()

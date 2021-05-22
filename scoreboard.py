@@ -5,20 +5,26 @@ from turtle import Turtle
 class Scoreboard(Turtle):
     def __init__(self):
         super().__init__()
-        self.level = 0
+        self.level = 1
+        self.high_score = 1
         self.hideturtle()
         self.penup()
-        self.goto(-220, 260)
+        self.goto(-160, 260)
         self.update_scoreboard()
 
     def update_scoreboard(self):
+        if self.level >= self.high_score:
+            self.high_score = self.level
         self.clear()
-        self.level += 1
-        self.write(f"Level: {self.level}", align='center', font=("Courier", 16, "bold"))
+        self.write(f"Level: {self.level} Highscore: {self.high_score}", align='center', font=("Courier", 14, "bold"))
 
-    def game_over(self):
-        self.goto(0, 0)
-        self.write(f"GAME OVER", align='center', font=("Courier", 24, "bold"))
+    def reset_scoreboard(self):
+        self.level = 1
+        self.update_scoreboard()
+
+    def increase_level(self):
+        self.level += 1
+
 
 
 

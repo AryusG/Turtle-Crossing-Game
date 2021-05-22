@@ -31,3 +31,9 @@ class CarManager:
     def increase_speed(self):
         self.starting_move_distance += self.move_increment
 
+    def reset(self):
+        for car in self.all_cars:
+            car.goto(900, 900)
+        self.all_cars.clear()
+        self.starting_move_distance = 5
+
