@@ -20,6 +20,7 @@ class Scoreboard(Turtle):
 
     def reset_scoreboard(self):
         if self.level >= self.high_score:
+            self.high_score = self.level
             with open("data.txt", "w") as data:
                 data.write(f"{self.level}")
         self.level = 1
